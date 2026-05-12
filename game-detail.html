@@ -1,0 +1,832 @@
+# game-detail.html
+
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHINCORE TOP UP</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#05070f;
+color:#FFD700;
+overflow-x:hidden;
+min-height:100vh;
+}
+
+/* BACKGROUND */
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 20% 20%, #FFD70022, transparent 35%),
+radial-gradient(circle at 80% 80%, #8B750022, transparent 35%);
+animation:bgmove 10s infinite alternate;
+z-index:-3;
+}
+
+@keyframes bgmove{
+0%{transform:scale(1);}
+100%{transform:scale(1.08);}
+}
+
+/* DIAMOND */
+
+.diamond{
+position:fixed;
+top:-50px;
+width:18px;
+opacity:0.8;
+z-index:-1;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+0%{
+transform:translateY(-10vh) rotate(0deg);
+}
+100%{
+transform:translateY(110vh) rotate(360deg);
+}
+}
+
+/* NAVBAR */
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 25px;
+background:rgba(0,0,0,0.55);
+backdrop-filter:blur(15px);
+border-bottom:1px solid #3a2d00;
+z-index:999;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.logo img{
+width:42px;
+height:42px;
+}
+
+.logo span{
+font-size:22px;
+font-weight:700;
+letter-spacing:2px;
+text-shadow:0 0 10px #FFD70088;
+}
+
+.nav-right{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+.nav-right a{
+text-decoration:none;
+color:#FFD700;
+font-size:24px;
+transition:0.3s;
+}
+
+.nav-right a:hover{
+color:white;
+transform:scale(1.1);
+}
+
+/* CONTAINER */
+
+.container{
+max-width:1100px;
+margin:120px auto 40px;
+padding:20px;
+}
+
+/* GAME HEADER */
+
+/* GAME HEADER */
+
+.game-header{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+margin-bottom:35px;
+text-align:center;
+}
+
+/* BOX GAMBAR */
+
+.game-image-box{
+padding:10px;
+border-radius:22px;
+background:rgba(255,215,0,0.06);
+border:1px solid rgba(255,215,0,0.2);
+
+/* NEON GOLD */
+box-shadow:
+0 0 10px #FFD70055,
+0 0 25px #FFD70033,
+0 0 40px #FFD70022;
+
+animation:goldGlow 2s infinite alternate;
+}
+
+/* ANIMASI NEON */
+
+@keyframes goldGlow{
+
+0%{
+box-shadow:
+0 0 10px #FFD70055,
+0 0 25px #FFD70033;
+}
+
+100%{
+box-shadow:
+0 0 20px #FFD700aa,
+0 0 40px #FFD70088,
+0 0 60px #FFD70055;
+}
+
+}
+
+/* GAMBAR GAME */
+
+.game-banner{
+width:220px;
+height:220px;
+object-fit:cover;
+border-radius:18px;
+display:block;
+}
+
+/* TEXT */
+
+.game-info{
+margin-top:18px;
+max-width:700px;
+}
+
+.game-info h1{
+font-size:34px;
+margin-bottom:12px;
+text-shadow:0 0 10px #FFD70088;
+}
+
+.game-info p{
+color:#ddd;
+line-height:1.8;
+}
+
+/* CARD */
+
+.topup-card{
+background:rgba(255,215,0,0.05);
+border:1px solid rgba(255,215,0,0.15);
+border-radius:20px;
+padding:25px;
+backdrop-filter:blur(10px);
+box-shadow:0 0 20px #FFD70022;
+}
+
+.card-title{
+font-size:24px;
+margin-bottom:20px;
+text-shadow:0 0 10px #FFD70055;
+}
+
+.form-group{
+margin-bottom:20px;
+}
+
+.form-group label{
+display:block;
+margin-bottom:8px;
+font-weight:600;
+}
+
+.form-group input,
+.form-group select{
+width:100%;
+padding:14px;
+border-radius:12px;
+border:1px solid #5e4b00;
+background:#0d111b;
+color:#FFD700;
+outline:none;
+font-size:15px;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+box-shadow:0 0 10px #FFD70055;
+}
+
+/* DIAMOND GRID */
+
+.diamond-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:15px;
+margin-top:15px;
+}
+
+.diamond-item{
+background:#0d111b;
+border:1px solid #5e4b00;
+padding:18px;
+border-radius:15px;
+text-align:center;
+cursor:pointer;
+transition:0.3s;
+}
+
+.diamond-item:hover{
+transform:translateY(-5px);
+box-shadow:0 0 15px #FFD70055;
+}
+
+.diamond-item.active{
+background:#FFD700;
+color:black;
+font-weight:bold;
+box-shadow:0 0 20px #FFD70088;
+}
+
+.price{
+margin-top:8px;
+font-size:14px;
+}
+
+/* BUTTON */
+
+.pay-btn{
+width:100%;
+padding:16px;
+border:none;
+border-radius:14px;
+background:#FFD700;
+color:black;
+font-size:17px;
+font-weight:700;
+cursor:pointer;
+transition:0.3s;
+margin-top:15px;
+}
+
+.pay-btn:hover{
+transform:translateY(-3px);
+box-shadow:0 0 20px #FFD70088;
+}
+
+/* TOTAL */
+
+.total-box{
+margin-top:20px;
+padding:18px;
+border-radius:15px;
+background:#0d111b;
+border:1px solid #5e4b00;
+}
+
+.total-box h3{
+margin-bottom:10px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.game-header{
+grid-template-columns:1fr;
+}
+
+.game-info h1{
+font-size:28px;
+}
+
+}
+
+/* FOOTER */
+
+footer{
+margin-top:50px;
+padding:35px 20px;
+border-top:1px solid rgba(255,215,0,0.15);
+background:rgba(0,0,0,0.4);
+backdrop-filter:blur(10px);
+text-align:center;
+}
+
+/* SOCIAL */
+
+.social{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:18px;
+margin-bottom:18px;
+flex-wrap:wrap;
+}
+
+.social a{
+width:52px;
+height:52px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+text-decoration:none;
+color:#FFD700;
+
+background:rgba(255,215,0,0.05);
+border:1px solid rgba(255,215,0,0.18);
+
+transition:0.3s;
+
+box-shadow:
+0 0 10px #FFD70022;
+}
+
+.social a:hover{
+
+transform:translateY(-5px) scale(1.08);
+
+background:#FFD700;
+color:#000;
+
+box-shadow:
+0 0 15px #FFD700aa,
+0 0 35px #FFD70066;
+
+}
+
+/* COPYRIGHT */
+
+.footer-text{
+font-size:14px;
+color:#d6c27a;
+letter-spacing:1px;
+text-shadow:0 0 10px #FFD70022;
+}
+
+</style>
+</head>
+
+<body>
+
+<script>
+
+function createDiamond(){
+
+const d=document.createElement("img");
+
+d.src="assets/diamond.png";
+
+d.classList.add("diamond");
+
+d.style.left=Math.random()*100+"vw";
+
+d.style.animationDuration=(3+Math.random()*5)+"s";
+
+document.body.appendChild(d);
+
+setTimeout(()=>{
+d.remove();
+},8000);
+
+}
+
+setInterval(createDiamond,250);
+
+</script>
+
+<!-- NAVBAR -->
+
+<nav>
+
+<div class="logo">
+<img src="assets/logo.png">
+<span>SHINCORE</span>
+</div>
+
+<div class="nav-right">
+<a href="index.html">
+<ion-icon name="home"></ion-icon>
+</a>
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="game-header">
+
+<div class="game-image-box">
+
+<img id="gameImage" class="game-banner">
+
+</div>
+
+<div class="game-info">
+
+<h1 id="gameTitle"></h1>
+
+<p id="gameDescription"></p>
+
+</div>
+
+</div>
+
+<div class="topup-card">
+
+<h2 class="card-title">Form Top Up</h2>
+
+<div class="form-group">
+<label id="inputLabel"></label>
+<input type="text" id="userInput" placeholder="Masukkan data akun">
+</div>
+
+
+
+<div class="form-group">
+<label>Pilih Diamond</label>
+
+<div class="diamond-grid" id="diamondGrid"></div>
+
+</div>
+
+<div class="form-group">
+<label>Metode Pembayaran</label>
+<select>
+<option>DANA</option>
+<option>OVO</option>
+<option>GOPAY</option>
+<option>QRIS</option>
+<option>BANK BCA</option>
+</select>
+</div>
+
+<div class="total-box">
+<h3>Total Pembayaran</h3>
+<p id="totalHarga">Rp 0</p>
+</div>
+
+<button class="pay-btn" onclick="bayarSekarang()">
+Bayar Sekarang
+</button>
+
+</div>
+
+</div>
+
+<!-- PBO JAVASCRIPT -->
+
+<script>
+/* =========================
+   CLASS GAME
+========================= */
+
+class Game {
+
+constructor(
+nama,
+gambar,
+deskripsi,
+inputType
+){
+
+this.nama = nama;
+this.gambar = gambar;
+this.deskripsi = deskripsi;
+this.inputType = inputType;
+
+}
+
+}
+
+/* =========================
+   INHERITANCE
+========================= */
+
+class TopUpGame extends Game {
+
+#diamondList;
+
+constructor(
+nama,
+gambar,
+deskripsi,
+inputType,
+diamondList
+){
+
+super(
+nama,
+gambar,
+deskripsi,
+inputType
+);
+
+this.#diamondList = diamondList;
+
+}
+
+getDiamond(){
+
+return this.#diamondList;
+
+}
+
+}
+
+/* =========================
+   DATA GAME
+========================= */
+
+const games = {
+
+mobilelegends : new TopUpGame(
+
+"Mobile Legends",
+"assets/mobilelegendss.jpg",
+"Top up diamond Mobile Legends murah dan cepat otomatis.",
+"User ID + Zone ID",
+
+[
+{ diamond: "86 Diamond", harga: 20000 },
+{ diamond: "172 Diamond", harga: 40000 },
+{ diamond: "257 Diamond", harga: 60000 },
+{ diamond: "344 Diamond", harga: 80000 },
+{ diamond: "514 Diamond", harga: 120000 },
+{ diamond: "706 Diamond", harga: 160000 }
+]
+
+),
+
+freefire : new TopUpGame(
+
+"Free Fire",
+"assets/freefire.jpg",
+"Top up diamond Free Fire cepat dan aman.",
+"Player ID",
+
+[
+{ diamond: "70 Diamond", harga: 10000 },
+{ diamond: "140 Diamond", harga: 20000 },
+{ diamond: "355 Diamond", harga: 50000 },
+{ diamond: "720 Diamond", harga: 100000 },
+{ diamond: "1450 Diamond", harga: 200000 }
+]
+
+),
+
+pubg : new TopUpGame(
+
+"PUBG Mobile",
+"assets/pubg.jpg",
+"Top up UC PUBG Mobile terpercaya.",
+"Character ID",
+
+[
+{ diamond: "60 UC", harga: 16000 },
+{ diamond: "325 UC", harga: 75000 },
+{ diamond: "660 UC", harga: 150000 },
+{ diamond: "1800 UC", harga: 350000 }
+]
+
+),
+
+valo : new TopUpGame(
+
+"Valorant",
+"assets/valo.jpg",
+"Top up Valorant Points instant.",
+"Riot ID + Tag",
+
+[
+{ diamond: "475 VP", harga: 50000 },
+{ diamond: "1000 VP", harga: 100000 },
+{ diamond: "2050 VP", harga: 200000 },
+{ diamond: "3650 VP", harga: 350000 }
+]
+
+),
+
+roblox : new TopUpGame(
+
+"Roblox",
+"assets/roblox.jpg",
+"Top up Robux Roblox murah.",
+"Username Roblox",
+
+[
+{ diamond: "80 Robux", harga: 15000 },
+{ diamond: "400 Robux", harga: 70000 },
+{ diamond: "800 Robux", harga: 140000 },
+{ diamond: "1700 Robux", harga: 280000 }
+]
+
+),
+
+genshinimpact : new TopUpGame(
+
+"Genshin Impact",
+"assets/genshin.jpg",
+"Top up Genesis Crystal Genshin Impact.",
+"UID Genshin",
+
+[
+{ diamond: "60 Genesis Crystal", harga: 16000 },
+{ diamond: "300 Genesis Crystal", harga: 79000 },
+{ diamond: "980 Genesis Crystal", harga: 249000 },
+{ diamond: "1980 Genesis Crystal", harga: 479000 }
+]
+
+)
+
+};
+
+/* =========================
+   AMBIL GAME DARI URL
+========================= */
+
+const params = new URLSearchParams(window.location.search);
+
+const selectedGame = params.get("game");
+
+const game = games[selectedGame];
+
+/* =========================
+   RENDER GAME
+========================= */
+
+document.getElementById("gameTitle").innerHTML =
+game.nama;
+
+document.getElementById("gameImage").src =
+game.gambar;
+
+document.getElementById("gameDescription").innerHTML =
+game.deskripsi;
+
+document.getElementById("inputLabel").innerHTML =
+`Masukkan ${game.inputType}`;
+
+/* =========================
+   RENDER DIAMOND
+========================= */
+
+const diamondGrid =
+document.getElementById("diamondGrid");
+
+const totalHarga =
+document.getElementById("totalHarga");
+
+let selectedPrice = 0;
+
+game.getDiamond().forEach(item => {
+
+const div = document.createElement("div");
+
+div.classList.add("diamond-item");
+
+div.innerHTML = `
+
+<h3>${item.diamond}</h3>
+
+<p class="price">
+Rp ${item.harga.toLocaleString()}
+</p>
+
+`;
+
+div.addEventListener("click", () => {
+
+document.querySelectorAll(".diamond-item")
+.forEach(el => {
+
+el.classList.remove("active");
+
+});
+
+div.classList.add("active");
+
+selectedPrice = item.harga;
+
+totalHarga.innerHTML =
+`Rp ${selectedPrice.toLocaleString()}`;
+
+});
+
+diamondGrid.appendChild(div);
+
+});
+
+/* =========================
+   PEMBAYARAN
+========================= */
+
+function bayarSekarang(){
+
+const inputUser =
+document.getElementById("userInput").value;
+
+if(inputUser === ""){
+
+alert("Masukkan data akun terlebih dahulu!");
+
+return;
+
+}
+
+if(selectedPrice === 0){
+
+alert("Pilih jumlah top up terlebih dahulu!");
+
+return;
+
+}
+
+alert(`
+
+Top Up Berhasil!
+
+Game : ${game.nama}
+
+Akun : ${inputUser}
+
+Total Pembayaran :
+Rp ${selectedPrice.toLocaleString()}
+
+Terima kasih telah top up di SHINCORE TOP UP
+
+`);
+
+}
+
+</script>
+
+<!-- IONICONS -->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+<footer>
+
+<div class="social">
+
+<a href="https://instagram.com" target="_blank">
+<ion-icon name="logo-instagram"></ion-icon>
+</a>
+
+<a href="https://wa.me/628123456789" target="_blank">
+<ion-icon name="logo-whatsapp"></ion-icon>
+</a>
+
+<a href="https://tiktok.com" target="_blank">
+<ion-icon name="logo-tiktok"></ion-icon>
+</a>
+
+<a href="https://youtube.com" target="_blank">
+<ion-icon name="logo-youtube"></ion-icon>
+</a>
+
+</div>
+
+<p class="footer-text">
+Top Up Cepat • Harga Murah • Proses Cepat
+</p>
+
+</footer>
+</body>
+</html>
+```
+
+
+
+
