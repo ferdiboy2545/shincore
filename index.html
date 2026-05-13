@@ -84,8 +84,8 @@ gap:10px;
 }
 
 .logo img{
-width:38px;
-height:38px;
+width:50px;
+height:50px;
 }
 
 .logo span{
@@ -141,6 +141,16 @@ overflow:hidden;
 border-radius:18px;
 border:1px solid #3a2d00;
 box-shadow:0 0 20px #FFD70033;
+background:#000;
+
+/* NEON GOLD */
+box-shadow:
+0 0 5px #FFD70055,
+0 0 15px #FFD70055,
+0 0 25px #FFD70033,
+0 0 40px #FFD70022;
+
+animation:neonGlow 2s infinite alternate;
 }
 
 .slides{
@@ -151,7 +161,8 @@ transition:transform 1s ease-in-out;
 .slides img{
 min-width:100%;
 height:240px;
-object-fit:cover;
+object-fit:contain;
+background:#000;
 }
 
 /* ===== TITLE ===== */
@@ -271,44 +282,218 @@ width:92%;
 
 .slides img{
 height:200px;
+object-fit:contain;
+background:#000;
 }
 
 }
 
 
+/* PROMO BAR */
+.promo-bar{
+    width:100%;
+    overflow:hidden;
+    background:#0f0f0f;
+    border-top:1px solid rgba(255,215,0,0.2);
+    border-bottom:1px solid rgba(255,215,0,0.2);
+    position:relative;
+    z-index:5;
+}
+
+/* TRACK */
+.promo-track{
+    display:flex;
+    width:max-content;
+    animation:scrollPromo 18s linear infinite;
+}
+
+/* TEXT */
+.promo-track span{
+    white-space:nowrap;
+    font-size:14px;
+    font-weight:600;
+    color:#FFD700;
+    padding:12px 0;
+    letter-spacing:0.5px;
+    text-shadow:0 0 8px rgba(255,215,0,0.4);
+}
+
+/* ANIMASI */
+@keyframes scrollPromo{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(-50%);
+    }
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+    .promo-track span{
+        font-size:12px;
+        padding:10px 0;
+    }
+
+    .promo-track{
+        animation:scrollPromo 12s linear infinite;
+    }
+}
+
+
+.dots{
+    text-align:center;
+    margin-top:10px;
+    position:relative;
+    z-index:10;
+}
+
+.dot{
+    height:8px;
+    width:8px;
+    margin:0 4px;
+    display:inline-block;
+    border-radius:50%;
+    background:rgba(255,215,0,0.3);
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.dot.active{
+    width:18px;
+    border-radius:10px;
+    background:#FFD700;
+    box-shadow:0 0 10px #FFD70088;
+}
+
+.card p{
+font-size:13px;
+font-weight:600;
+color:#FFD700; /* FIX GOLD */
+text-shadow:0 0 6px #FFD70033;
+}
+
+.card a{
+color:#FFD700; /* kalau pakai <a> card */
+text-decoration:none;
+}
+
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  align-items: center;
+}
+
+/* SHINCORE (BESAR + GOLD ANIMASI) */
+.brand-title {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 2px;
+
+  background: linear-gradient(90deg,#f5c542,#fff3b0,#f5c542);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: goldMove 3s linear infinite, floatLogoText 3s ease-in-out infinite;
+  text-shadow: 0 0 10px rgba(245,197,66,0.3);
+}
+
+/* TOPUP STORE (KECIL) */
+.brand-sub {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: #d4af37;
+  opacity: 0.9;
+
+  animation: fadeFloat 3s ease-in-out infinite;
+}
+
+/* 🔥 ANIMASI GOLD SHINE */
+@keyframes goldMove {
+  0% { background-position: 0%; }
+  100% { background-position: 200%; }
+}
+
+/* 🔥 FLOAT GERAK NAIK TURUN */
+@keyframes floatLogoText {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+/* 🔥 SUB FLOAT HALUS */
+@keyframes fadeFloat {
+  0%,100% { transform: translateX(0); opacity: 0.7; }
+  50% { transform: translateX(2px); opacity: 1; }
+}
 
 </style>
 </head>
 
 <body>
 
+
 <!-- DIAMOND RAIN -->
 
 <script>
-
 function createDiamond(){
+    const d = document.createElement("img");
+    d.src = "assets/diamond.png";
+    d.classList.add("diamond");
+    d.style.left = Math.random() * 100 + "vw";
+    d.style.animationDuration = (3 + Math.random() * 5) + "s";
 
-const d=document.createElement("img");
+    document.body.appendChild(d);
 
-d.src="assets/diamond.png";
-
-d.classList.add("diamond");
-
-d.style.left=Math.random()*100+"vw";
-
-d.style.animationDuration=(3+Math.random()*5)+"s";
-
-document.body.appendChild(d);
-
-setTimeout(()=>{
-d.remove();
-},8000);
-
+    setTimeout(()=>{
+        d.remove();
+    }, 8000);
 }
 
-setInterval(createDiamond,250);
+setInterval(createDiamond, 250);
 
+
+// ===== SLIDER + DOT FIX =====
+document.addEventListener("DOMContentLoaded", () => {
+
+    const slides = document.querySelector(".slides");
+    const dots = document.querySelectorAll(".dot");
+
+    if(!slides || dots.length === 0) return;
+
+    let index = 0;
+
+    function showSlide(i){
+        index = i;
+
+        slides.style.transform = `translateX(-${i * 100}%)`;
+
+        dots.forEach(d => d.classList.remove("active"));
+        dots[i].classList.add("active");
+    }
+
+    function nextSlide(){
+        index = (index + 1) % dots.length;
+        showSlide(index);
+    }
+
+    // auto jalan
+    setInterval(nextSlide, 4000);
+
+    // klik dot
+    dots.forEach((dot, i)=>{
+        dot.addEventListener("click", ()=>{
+            showSlide(i);
+        });
+    });
+
+});
 </script>
+
+
 
 <!-- NAVBAR -->
 
@@ -316,7 +501,10 @@ setInterval(createDiamond,250);
 
 <div class="logo">
 <img src="assets/logo.png">
-<span>SHINCORE</span>
+<div class="brand">
+  <span class="brand-title">SHINCORE</span>
+  <span class="brand-sub">TOPUP STORE</span>
+</div>
 </div>
 
 <div class="menu" id="menu">
@@ -347,6 +535,30 @@ setInterval(createDiamond,250);
 
 </div>
 
+</div>
+
+<div class="dots">
+  <span class="dot active"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+</div>
+
+
+<!-- PROMO BERJALAN -->
+<div class="promo-bar">
+  <div class="promo-track">
+    <span>
+      👑 PROMO SHINCORE TOPUP • 💎 DISKON 10% DI DIAMOND 500+ • 
+      FAST PROCESS ⚡ • ☎️ 24/7 ONLINE SUPPORT • 
+      AMAN & TERPERCAYA • 🔥 MEMBER VIP BONUS CASHBACK •
+    </span>
+
+    <span>
+      👑 PROMO SHINCORE TOPUP • 💎 DISKON 10% DI DIAMOND 500+ • 
+      FAST PROCESS ⚡ • ☎️ 24/7 ONLINE SUPPORT • 
+      AMAN & TERPERCAYA •🔥 MEMBER VIP BONUS CASHBACK •
+    </span>
+  </div>
 </div>
 
 <!-- TITLE -->
@@ -390,7 +602,33 @@ setInterval(createDiamond,250);
 
 </div>
 
-<!-- FOOTER -->
+<section id="joki">
+  <h2 class="section-title">JOKI GAME</h2>
+
+  <div class="grid">
+
+  <a href="order.html?game=ml" class="card">
+    <img src="assets/mobilelegendss.jpg">
+    <p>Mobile Legends</p>
+  </a>
+
+  <a href="order.html?game=ff" class="card">
+    <img src="assets/freefire.jpg">
+    <p>Free Fire</p>
+  </a>
+
+  <a href="order.html?game=pubg" class="card">
+    <img src="assets/pubg.jpg">
+    <p>PUBG Mobile</p>
+  </a>
+
+  <a href="order.html?game=valo" class="card">
+    <img src="assets/valo.jpg">
+    <p>Valorant</p>
+  </a>
+
+</div>
+</section>
 
 
 
@@ -469,6 +707,9 @@ function pilihGame(game){
 window.location.href = `game-detail.html?game=${game}`;
 
 }
+
+
+
 
 </script>
 

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHINCORE JOKI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== BASE ===== */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#05070f;
+color:#FFD700;
+overflow-x:hidden;
+}
+
+/* ===== BACKGROUND ===== */
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 20% 20%, #FFD70022, transparent 35%),
+radial-gradient(circle at 80% 80%, #8B750022, transparent 35%);
+animation:bgmove 10s infinite alternate;
+z-index:-3;
+}
+
+@keyframes bgmove{
+0%{transform:scale(1);}
+100%{transform:scale(1.08);}
+}
+
+/* ===== DIAMOND ===== */
+.diamond{
+position:fixed;
+top:-50px;
+width:18px;
+z-index:-1;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-10vh) rotate(0);}
+100%{transform:translateY(110vh) rotate(360deg);}
+}
+
+/* ===== NAVBAR ===== */
+nav{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 22px;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(18px);
+border-bottom:1px solid #3a2d00;
+z-index:999;
+}
+
+/* LEFT SIDE */
+.nav-left{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.logo-img{
+width:38px;
+height:38px;
+object-fit:contain;
+filter:drop-shadow(0 0 10px #FFD70088);
+}
+
+/* TEXT BRAND */
+.brand{
+font-size:16px;
+font-weight:700;
+letter-spacing:1px;
+color:#FFD700;
+text-shadow:0 0 10px #FFD70055;
+}
+
+.brand b{
+color:#fff3b0;
+}
+
+/* HOME BUTTON */
+.home-btn{
+display:flex;
+align-items:center;
+justify-content:center;
+width:42px;
+height:42px;
+border-radius:12px;
+background:rgba(255,215,0,0.08);
+border:1px solid rgba(255,215,0,0.25);
+transition:0.3s;
+}
+
+.home-btn svg{
+width:22px;
+height:22px;
+fill:#FFD700;
+filter:drop-shadow(0 0 6px #FFD70088);
+}
+
+.home-btn:hover{
+transform:translateY(-2px) scale(1.05);
+box-shadow:0 0 18px #FFD70055;
+}
+
+/* ===== CONTAINER ===== */
+.container{
+max-width:1100px;
+margin:120px auto;
+padding:20px;
+text-align:center;
+}
+
+/* ===== GAME BOX ===== */
+.game-image-box{
+padding:12px;
+border-radius:22px;
+background:rgba(255,215,0,0.06);
+border:1px solid rgba(255,215,0,0.2);
+box-shadow:0 0 25px #FFD70033;
+display:inline-block;
+}
+
+.game-banner{
+width:220px;
+height:220px;
+object-fit:cover;
+border-radius:18px;
+}
+
+/* ===== TITLE ===== */
+h1{
+margin-top:15px;
+text-shadow:0 0 10px #FFD70088;
+}
+
+/* ===== CARD ===== */
+.card{
+max-width:500px;
+margin:30px auto;
+padding:20px;
+background:rgba(255,215,0,0.05);
+border:1px solid rgba(255,215,0,0.15);
+border-radius:20px;
+box-shadow:0 0 20px #FFD70022;
+}
+
+/* ===== INPUT ===== */
+input, textarea, select{
+width:100%;
+padding:12px;
+margin-top:10px;
+margin-bottom:15px;
+border-radius:10px;
+border:1px solid #5e4b00;
+background:#0d111b;
+color:#FFD700;
+outline:none;
+}
+
+/* ===== BUTTON ===== */
+button{
+width:100%;
+padding:14px;
+background:#FFD700;
+border:none;
+font-weight:bold;
+cursor:pointer;
+border-radius:12px;
+}
+
+button:hover{
+box-shadow:0 0 20px #FFD70088;
+transform:translateY(-3px);
+}
+
+/* ===== NEON BOX ===== */
+.game-image-box{
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+0%{box-shadow:0 0 10px #FFD70033;}
+100%{box-shadow:0 0 30px #FFD70088;}
+}
+
+</style>
+</head>
+
+<body>
+<nav>
+  <div class="nav-left">
+    <img src="assets/logo.png" class="logo-img">
+    <span class="brand">SHINCORE <b>JOKI</b></span>
+  </div>
+
+  <div class="nav-right">
+    <a href="index.html" class="home-btn">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3z"/>
+      </svg>
+    </a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="game-image-box">
+    <img id="gameImg" class="game-banner">
+  </div>
+
+  <h1 id="gameName"></h1>
+
+  <div class="card">
+
+    <label>Game ID</label>
+    <input type="text" id="userId">
+
+    <label>Rank / Target</label>
+    <input type="text" id="rank">
+
+    <label>Catatan</label>
+    <textarea id="note"></textarea>
+
+    <label>Metode</label>
+    <select>
+      <option>DANA</option>
+      <option>OVO</option>
+      <option>GOPAY</option>
+      <option>QRIS</option>
+    </select>
+
+    <button onclick="orderWA()" style="width:100%;padding:10px;background:#FFD700;border:none;font-weight:bold;">
+ORDER VIA WHATSAPP
+</button>
+
+  </div>
+
+</div>
+
+<script>
+
+/* ===== DIAMOND ===== */
+function createDiamond(){
+const d=document.createElement("img");
+d.src="assets/diamond.png";
+d.classList.add("diamond");
+d.style.left=Math.random()*100+"vw";
+d.style.animationDuration=(3+Math.random()*5)+"s";
+document.body.appendChild(d);
+setTimeout(()=>d.remove(),8000);
+}
+setInterval(createDiamond,250);
+
+/* ===== PBO CLASS ===== */
+class Game{
+constructor(name,img){
+this.name=name;
+this.img=img;
+}
+}
+
+/* ===== DATA ===== */
+const games = {
+  ml: new Game("Mobile Legends JOKI VIP", "assets/mobilelegendss.jpg"),
+  ff: new Game("Free Fire JOKI VIP", "assets/freefire.jpg"),
+  pubg: new Game("PUBG JOKI VIP", "assets/pubg.jpg"),
+  valo: new Game("Valorant JOKI VIP", "assets/valo.jpg")
+};
+
+/* ===== GET GAME ===== */
+window.onload = function () {
+  const url = new URLSearchParams(window.location.search);
+  const g = url.get("game");
+
+  if (games[g]) {
+    document.getElementById("gameName").innerText = games[g].name;
+    document.getElementById("gameImg").src = games[g].img;
+  }
+};
+
+
+function orderWA(){
+
+const game = document.getElementById("gameName").innerText;
+const id = document.getElementById("userId").value;
+const rank = document.getElementById("rank").value;
+const note = document.getElementById("note").value;
+const metode = document.querySelector("select").value;
+
+if(!id || !rank){
+alert("ISI DATA DULU!");
+return;
+}
+
+const nomor = "628567162320";
+
+const pesan = 
+`🔥 ORDER JOKI SHINCORE 🔥%0A%0A` +
+`🎮 Game: ${game}%0A` +
+`🆔 ID: ${id}%0A` +
+`🏆 Rank/Target: ${rank}%0A` +
+`💳 Metode: ${metode}%0A` +
+`📝 Catatan: ${note || "-"}%0A%0A` +
+`💎 Mohon diproses secepatnya!`;
+
+window.open(`https://wa.me/${nomor}?text=${pesan}`, "_blank");
+
+}
+
+
+</script>
+
+</body>
+</html>
