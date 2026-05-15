@@ -3,386 +3,485 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support VIP</title>
 
-<title>Luxora Support</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
+  font-family:sans-serif;
 }
 
 body{
-  background:#f5f7ff;
+  background:radial-gradient(circle at top,#0b1220,#05070d);
+  color:white;
   overflow-x:hidden;
-  color:#222;
 }
 
-/* BACKGROUND */
-
-.bg-animation{
+/* 🔥 BACKGROUND GLOW */
+body::before{
+  content:"";
   position:fixed;
-  inset:0;
+  width:100%;
+  height:100%;
+  background:radial-gradient(circle at 20% 20%, rgba(245,197,66,0.08), transparent 40%),
+             radial-gradient(circle at 80% 60%, rgba(245,197,66,0.05), transparent 40%);
+  animation:moveGlow 8s infinite alternate;
   z-index:-1;
-
-  background:
-  radial-gradient(circle at top left, rgba(108,99,255,0.22), transparent 30%),
-  radial-gradient(circle at bottom right, rgba(0,212,255,0.18), transparent 30%),
-  radial-gradient(circle at center, rgba(255,110,199,0.15), transparent 35%),
-  linear-gradient(to bottom,#f8f9ff,#eef4ff);
 }
 
-/* HEADER */
+@keyframes moveGlow{
+  0%{transform:translate(0,0);}
+  100%{transform:translate(40px,30px);}
+}
 
-header{
+/* NAVBAR */
+/* NAVBAR FIX SAMA INDEX */
+.navbar{
   position:sticky;
   top:0;
-  z-index:999;
+  z-index:1000;
 
   display:flex;
   justify-content:space-between;
   align-items:center;
 
-  padding:14px 8%;
+  padding:14px 20px;
 
-  background:rgba(255,255,255,0.75);
+  backdrop-filter: blur(15px);
+  background:rgba(10,15,25,0.65);
+  border-bottom:1px solid rgba(245,197,66,0.2);
 
-  backdrop-filter:blur(15px);
-
-  border-bottom:1px solid rgba(255,255,255,0.5);
-
-  box-shadow:
-  0 5px 25px rgba(108,99,255,0.08);
+  transition:0.3s;
 }
 
-/* LOGO */
+/* SHRINK EFFECT */
+.navbar.shrink{
+  padding:8px 20px;
+  background:rgba(10,15,25,0.85);
+}
 
-.logo{
+/* LEFT */
+.left{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:10px;
 }
 
-.logo img{
-  width:70px;
-  height:70px;
+/* LOGO ANIMASI */
+.logo{
+  width:45px;
+  height:45px;
   object-fit:contain;
-
-  filter:
-  drop-shadow(0 0 18px rgba(108,99,255,0.25));
+  animation:floatLogo 3s ease-in-out infinite;
 }
 
-.logo span{
-  font-size:28px;
-  font-weight:800;
+@keyframes floatLogo{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-3px);}
+}
 
-  background:linear-gradient(
-    to right,
-    #6c63ff,
-    #00d4ff,
-    #ff6ec7
-  );
+.logo:hover{
+  transform:scale(1.08);
+  filter:drop-shadow(0 0 18px #f5c542);
+}
 
+/* BRAND */
+.brand{
+  display:flex;
+  flex-direction:column;
+  line-height:1;
+}
+
+.brand span{
+  font-size:16px;
+  font-weight:bold;
+  background:linear-gradient(90deg,#f5c542,#fff3b0,#f5c542);
+  background-size:200%;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+  animation:gold 4s linear infinite;
+}
+
+.brand small{
+  font-size:10px;
+  color:#d4af37;
+}
+
+/* GOLD ANIMATION */
+@keyframes gold{
+  from{background-position:0%}
+  to{background-position:200%}
 }
 
 /* HOME BUTTON */
-
 .home-btn{
-  width:55px;
-  height:55px;
-
-  border-radius:18px;
-
+  width:40px;
+  height:40px;
   display:flex;
   align-items:center;
   justify-content:center;
-
-  text-decoration:none;
-
-  background:linear-gradient(
-    135deg,
-    #6c63ff,
-    #00d4ff,
-    #ff6ec7
-  );
-
-  color:white;
-
-  font-size:26px;
-
-  box-shadow:
-  0 10px 25px rgba(108,99,255,0.18);
-
-  transition:.3s;
+  border-radius:10px;
+  background:#0b1220;
+  border:1px solid rgba(245,197,66,0.2);
+  color:#f5c542;
+  transition:0.3s;
+  position:relative;
+  overflow:hidden;
 }
 
 .home-btn:hover{
-  transform:translateY(-4px) scale(1.05);
+  transform:translateY(-3px) scale(1.08);
+  box-shadow:0 0 15px rgba(245,197,66,0.4);
+  border:1px solid #f5c542;
 }
 
-/* HERO */
+.home-btn::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition:0.5s;
+}
 
-.support-hero{
-  padding:90px 8% 60px;
+.home-btn:hover::after{
+  left:120%;
+}
+
+/* CONTAINER */
+.container{
+  max-width:500px;
+  margin:20px auto;
+  padding:15px;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+/* HEADER */
+.header{
   text-align:center;
 }
 
-.support-hero h1{
-  font-size:65px;
-  line-height:1.1;
-  margin-bottom:25px;
-
-  background:linear-gradient(
-    to right,
-    #6c63ff,
-    #00d4ff,
-    #ff6ec7
-  );
-
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+.header h1{
+  color:#f5c542;
+  font-size:22px;
 }
 
-.support-hero p{
-  font-size:18px;
-  color:#666;
-  max-width:800px;
-  margin:auto;
-  line-height:1.9;
-}
-
-/* SUPPORT GRID */
-
-.support-grid{
-  padding:20px 8% 100px;
-
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-
-  gap:30px;
+.header p{
+  font-size:13px;
+  opacity:0.7;
 }
 
 /* CARD */
-
-.support-card{
-  background:rgba(255,255,255,0.75);
-
-  border:1px solid rgba(255,255,255,0.7);
-
-  border-radius:30px;
-
-  padding:35px;
-
-  backdrop-filter:blur(12px);
-
-  box-shadow:
-  0 10px 25px rgba(108,99,255,0.08);
-
-  transition:.4s;
+.card{
+  background:#0f172a;
+  padding:15px;
+  border-radius:15px;
+  border:1px solid rgba(245,197,66,0.2);
 }
 
-.support-card:hover{
-  transform:translateY(-10px);
-
-  box-shadow:
-  0 20px 40px rgba(108,99,255,0.18);
+/* CONTACT */
+.contact{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
-.support-icon{
-  width:75px;
-  height:75px;
-
-  border-radius:24px;
-
+.btn{
   display:flex;
   align-items:center;
-  justify-content:center;
-
-  margin-bottom:25px;
-
-  font-size:34px;
-
-  background:linear-gradient(
-    135deg,
-    #6c63ff,
-    #00d4ff,
-    #ff6ec7
-  );
-
-  color:white;
-}
-
-.support-card h2{
-  margin-bottom:15px;
-  font-size:26px;
-}
-
-.support-card p{
-  color:#666;
-  line-height:1.8;
-  margin-bottom:25px;
-}
-
-.support-btn{
-  width:100%;
-
-  padding:16px;
-
-  border:none;
-  border-radius:18px;
-
+  gap:10px;
+  padding:12px;
+  border-radius:10px;
+  background:#0b1220;
   cursor:pointer;
-
-  font-size:15px;
-  font-weight:700;
-
-  color:white;
-
-  background:linear-gradient(
-    135deg,
-    #6c63ff,
-    #00d4ff,
-    #ff6ec7
-  );
-
-  box-shadow:
-  0 10px 25px rgba(108,99,255,0.18);
-
-  transition:.3s;
+  transition:0.3s;
+  border:1px solid transparent;
 }
 
-.support-btn:hover{
+.btn:hover{
   transform:scale(1.03);
+  border:1px solid #f5c542;
+  box-shadow:0 0 10px rgba(245,197,66,0.2);
 }
 
-/* RESPONSIVE */
-
-@media(max-width:700px){
-
-  .support-hero h1{
-    font-size:42px;
-  }
-
-  .logo span{
-    font-size:22px;
-  }
-
-  .logo img{
-    width:55px;
-    height:55px;
-  }
-
-  .home-btn{
-    width:48px;
-    height:48px;
-    font-size:22px;
-  }
-
+.btn i{
+  color:#f5c542;
+  font-size:18px;
 }
 
+/* CHAT BOX */
+.chat-box{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  max-height:200px;
+  overflow:auto;
+}
+
+.msg{
+  padding:10px;
+  border-radius:10px;
+  font-size:13px;
+  max-width:80%;
+}
+
+.admin{
+  background:#1e293b;
+}
+
+.user{
+  background:#f5c542;
+  color:black;
+  align-self:flex-end;
+}
+
+/* INPUT */
+.chat-input{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
+
+input{
+  flex:1;
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  background:#0b1220;
+  color:white;
+}
+
+button{
+  padding:10px 15px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(90deg,#b8860b,#f5c542);
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* FOOTER */
+.footer{
+  text-align:center;
+  font-size:14px;
+  margin-top:15px;
+  font-weight:600;
+  letter-spacing:1px;
+
+  /* 🔥 GOLD GRADIENT TEXT */
+  background: linear-gradient(90deg,#b8860b,#f5c542,#ffd700,#f5c542,#b8860b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* 🔥 GLOW EFFECT */
+  text-shadow: 0 0 8px rgba(245,197,66,0.3);
+
+  /* 🔥 ANIMASI SHINE */
+  background-size: 200%;
+  animation: shine 3s linear infinite;
+}
+
+/* animasi jalan */
+@keyframes shine{
+  0%{background-position:0%;}
+  100%{background-position:200%;}
+}
+
+#musicBtn{
+  position:fixed;
+  bottom:10px;
+  left:10px;
+  padding:12px 14px;
+  border-radius:10px;
+  background:#111827;
+  border:1px solid #f5c542;
+  color:#f5c542;
+  font-weight:bold;
+  cursor:pointer;
+  z-index:9999;
+  box-shadow:0 0 10px rgba(245,197,66,0.3);
+  transition:0.2s;
+  transform:scale(0.8);
+}
+
+#musicBtn:hover{
+  transform:scale(0.7);
+}
 </style>
 </head>
 
 <body>
+<div id="musicBtn" onclick="toggleMusic()">
+  🎵
+</div>
 
-<div class="bg-animation"></div>
 
-<header>
 
-  <div class="logo">
-    <img src="logoo.png">
-    <span>LUXORA</span>
+<div class="navbar" id="navbar">
+
+  <div class="left">
+    <img src="assets/logo.png" class="logo">
+    <div class="brand">
+      <span>SHINCORE</span>
+      <small>TOPUP STORE</small>
+    </div>
   </div>
 
   <a href="index.html" class="home-btn">
-    ⌂
+    <i class="fa fa-home"></i>
   </a>
 
-</header>
+</div>
 
-<section class="support-hero">
+</div>
 
-  <h1>
-    Luxora Support Center
-  </h1>
+<div class="container">
 
-  <p>
-    Kami siap membantu kebutuhan pelanggan Luxora
-    dengan layanan premium modern 24 jam.
-  </p>
-
-</section>
-
-<section class="support-grid">
-
-  <div class="support-card">
-
-    <div class="support-icon">
-      💬
-    </div>
-
-    <h2>Live Chat</h2>
-
-    <p>
-      Hubungi customer service secara realtime
-      dengan respon cepat dan modern.
-    </p>
-
-    <button class="support-btn">
-      Mulai Chat
-    </button>
-
+  <div class="header">
+    <h1>💬 Customer Support VIP</h1>
+    <p>Kami siap bantu 24 Jam 🚀</p>
   </div>
 
-  <div class="support-card">
-
-    <div class="support-icon">
-      📦
-    </div>
-
-    <h2>Lacak Pesanan</h2>
-
-    <p>
-      Cek status pesanan dan pengiriman
-      produk Luxora dengan mudah.
-    </p>
-
-    <button class="support-btn">
-      Tracking
-    </button>
-
+  <!-- CONTACT -->
+  <div class="card contact">
+    <div class="btn"><i class="fab fa-whatsapp"></i> WhatsApp Support</div>
+    <div class="btn"><i class="fas fa-envelope"></i> Email Support</div>
+    <div class="btn"><i class="fab fa-discord"></i> Discord Server</div>
   </div>
 
-  <div class="support-card">
-
-    <div class="support-icon">
-      🔒
+  <!-- LIVE CHAT -->
+  <div class="card">
+    <div class="chat-box" id="chatBox">
+      <div class="msg admin">Halo 👋 Ada yang bisa kami bantu?</div>
     </div>
 
-    <h2>Keamanan Akun</h2>
-
-    <p>
-      Bantuan keamanan akun dan perlindungan
-      transaksi pelanggan Luxora.
-    </p>
-
-    <button class="support-btn">
-      Security
-    </button>
-
+    <div class="chat-input">
+      <input id="chatInput" placeholder="Ketik pesan...">
+      <button onclick="sendMsg()">Kirim</button>
+    </div>
   </div>
 
-</section>
+  <div class="footer">
+    
+  </div>
 
+</div>
+
+<script>
+function sendMsg(){
+  let input = document.getElementById("chatInput");
+  let text = input.value.trim();
+  if(!text) return;
+
+  let chatBox = document.getElementById("chatBox");
+
+  let userMsg = document.createElement("div");
+  userMsg.className = "msg user";
+  userMsg.innerText = text;
+  chatBox.appendChild(userMsg);
+
+  input.value = "";
+
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  setTimeout(()=>{
+    let adminMsg = document.createElement("div");
+    adminMsg.className = "msg admin";
+    adminMsg.innerText = "Admin akan membalas secepatnya 🚀";
+    chatBox.appendChild(adminMsg);
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+  },1000);
+}
+
+window.addEventListener("scroll", () => {
+  let navbar = document.getElementById("navbar");
+
+  if(window.scrollY > 50){
+    navbar.classList.add("shrink");
+  } else {
+    navbar.classList.remove("shrink");
+  }
+});
+
+
+//music
+window.addEventListener("DOMContentLoaded", () => {
+
+  const music = document.getElementById("bgMusic");
+
+  let isPlaying = localStorage.getItem("musicOn") === "true";
+  let savedTime = localStorage.getItem("musicTime");
+
+  if (!music) return;
+
+  // lanjut posisi lagu
+  if (savedTime) {
+    music.currentTime = parseFloat(savedTime);
+  }
+
+  music.volume = 0.4;
+
+  // auto resume kalau sebelumnya ON
+  if (isPlaying) {
+    music.play().catch(() => {});
+  }
+
+  window.toggleMusic = function () {
+
+    if (!music) return;
+
+    if (music.paused) {
+      music.play().then(() => {
+        localStorage.setItem("musicOn", "true");
+      }).catch(()=>{});
+    } else {
+      music.pause();
+      localStorage.setItem("musicOn", "false");
+    }
+
+  };
+
+  // simpan posisi setiap detik
+  setInterval(() => {
+    if (!music.paused) {
+      localStorage.setItem("musicTime", music.currentTime);
+    }
+  }, 1000);
+
+});
+
+//sound click
+function playClick(){
+  const sound = document.getElementById("uiSound");
+  if(!sound) return;
+
+  sound.currentTime = 0;
+  sound.volume = 0.4;
+  sound.play().catch(()=>{});
+}
+
+document.addEventListener("click", function(e){
+
+  // hindari klik kosong / area berat (biar gak spam & lag)
+  if(e.target.closest("script") || e.target.tagName === "HTML") return;
+
+  playClick();
+
+});
+</script>
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="uiSound" src="click.mp3" preload="auto"></audio>
 </body>
 </html>
