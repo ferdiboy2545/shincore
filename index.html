@@ -1,717 +1,218 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SHINCORE TOP UP</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- FONT VIP -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <title>SHINCORE STORE</title>
 
-<style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-body{
-background:#05070f;
-color:#FFD700;
-overflow-x:hidden;
-}
-
-/* ===== BACKGROUND VIP ===== */
-
-body::before{
-content:"";
-position:fixed;
-inset:0;
-background:
-radial-gradient(circle at 20% 20%, #FFD70022, transparent 35%),
-radial-gradient(circle at 80% 80%, #8B750022, transparent 35%);
-animation:bgmove 10s infinite alternate;
-z-index:-3;
-}
-
-@keyframes bgmove{
-0%{transform:scale(1);}
-100%{transform:scale(1.08);}
-}
-
-/* ===== DIAMOND ===== */
-
-.diamond{
-position:fixed;
-top:-50px;
-width:18px;
-opacity:0.8;
-z-index:-1;
-animation:fall linear infinite;
-}
-
-@keyframes fall{
-0%{
-transform:translateY(-10vh) rotate(0deg);
-}
-100%{
-transform:translateY(110vh) rotate(360deg);
-}
-}
-
-/* ===== NAVBAR ===== */
-
-nav{
-position:fixed;
-top:0;
-width:100%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 25px;
-background:rgba(0,0,0,0.5);
-backdrop-filter:blur(15px);
-border-bottom:1px solid #3a2d00;
-z-index:999;
-}
-
-.logo{
-display:flex;
-align-items:center;
-gap:10px;
-}
-
-.logo img{
-width:50px;
-height:50px;
-}
-
-.logo span{
-font-size:20px;
-font-weight:700;
-letter-spacing:2px;
-color:#FFD700;
-text-shadow:0 0 10px #FFD70055;
-}
-
-.menu{
-display:flex;
-gap:20px;
-}
-
-.menu a{
-text-decoration:none;
-color:#FFD700;
-transition:0.3s;
-font-size:15px;
-}
-
-.menu a:hover{
-color:white;
-text-shadow:0 0 10px #FFD700;
-}
-
-/* ===== HAMBURGER ===== */
-
-.hamburger{
-display:none;
-font-size:28px;
-cursor:pointer;
-transition:0.3s;
-}
-
-.hamburger.active{
-transform:rotate(90deg);
-}
-
-/* ===== SLIDER ===== */
-
-.slider{
-margin-top:100px;
-display:flex;
-justify-content:center;
-}
-
-.slider-box{
-width:80%;
-max-width:700px;
-overflow:hidden;
-border-radius:18px;
-border:1px solid #3a2d00;
-box-shadow:0 0 20px #FFD70033;
-background:#000;
-
-/* NEON GOLD */
-box-shadow:
-0 0 5px #FFD70055,
-0 0 15px #FFD70055,
-0 0 25px #FFD70033,
-0 0 40px #FFD70022;
-
-animation:neonGlow 2s infinite alternate;
-}
-
-.slides{
-display:flex;
-transition:transform 1s ease-in-out;
-}
-
-.slides img{
-min-width:100%;
-height:240px;
-object-fit:contain;
-background:#000;
-}
-
-/* ===== TITLE ===== */
-
-.section-title{
-text-align:center;
-margin:25px 0;
-font-size:24px;
-color:#FFD700;
-text-shadow:0 0 10px #FFD70055;
-}
-
-/* ===== GRID GAME ===== */
-
-.grid{
-max-width:900px;
-margin:auto;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
-gap:15px;
-padding:20px;
-}
-
-.card{
-background:rgba(255,215,0,0.05);
-border:1px solid rgba(255,215,0,0.1);
-border-radius:12px;
-padding:10px;
-text-align:center;
-transition:0.3s;
-cursor:pointer;
-}
-
-.card:hover{
-transform:translateY(-5px);
-box-shadow:0 0 15px #FFD70055;
-}
-
-.card img{
-width:100%;
-height:100px;
-object-fit:cover;
-border-radius:10px;
-margin-bottom:8px;
-}
-
-.card p{
-font-size:13px;
-font-weight:600;
-}
-
-/* ===== FOOTER ===== */
-
-footer{
-margin-top:40px;
-padding:25px;
-text-align:center;
-border-top:1px solid #3a2d00;
-}
-
-.social{
-display:flex;
-justify-content:center;
-gap:18px;
-margin-bottom:12px;
-}
-
-.social a{
-width:45px;
-height:45px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-background:rgba(255,215,0,0.05);
-border:1px solid rgba(255,215,0,0.15);
-transition:0.3s;
-font-size:22px;
-color:#FFD700;
-text-decoration:none;
-}
-
-.social a:hover{
-transform:translateY(-4px) scale(1.08);
-background:#FFD700;
-color:black;
-box-shadow:0 0 15px #FFD70066;
-}
-
-/* ===== RESPONSIVE ===== */
-
-@media(max-width:768px){
-
-.menu{
-position:absolute;
-top:70px;
-right:15px;
-flex-direction:column;
-background:#0b0f18;
-padding:15px;
-border-radius:12px;
-border:1px solid #3a2d00;
-display:none;
-}
-
-.menu.show{
-display:flex;
-}
-
-.hamburger{
-display:block;
-}
-
-.slider-box{
-width:92%;
-}
-
-.slides img{
-height:200px;
-object-fit:contain;
-background:#000;
-}
-
-}
-
-
-/* PROMO BAR */
-.promo-bar{
-    width:100%;
-    overflow:hidden;
-    background:#0f0f0f;
-    border-top:1px solid rgba(255,215,0,0.2);
-    border-bottom:1px solid rgba(255,215,0,0.2);
-    position:relative;
-    z-index:5;
-}
-
-/* TRACK */
-.promo-track{
-    display:flex;
-    width:max-content;
-    animation:scrollPromo 18s linear infinite;
-}
-
-/* TEXT */
-.promo-track span{
-    white-space:nowrap;
-    font-size:14px;
-    font-weight:600;
-    color:#FFD700;
-    padding:12px 0;
-    letter-spacing:0.5px;
-    text-shadow:0 0 8px rgba(255,215,0,0.4);
-}
-
-/* ANIMASI */
-@keyframes scrollPromo{
-    from{
-        transform:translateX(0);
-    }
-    to{
-        transform:translateX(-50%);
-    }
-}
-
-/* MOBILE */
-@media(max-width:768px){
-
-    .promo-track span{
-        font-size:12px;
-        padding:10px 0;
-    }
-
-    .promo-track{
-        animation:scrollPromo 12s linear infinite;
-    }
-}
-
-
-.dots{
-    text-align:center;
-    margin-top:10px;
-    position:relative;
-    z-index:10;
-}
-
-.dot{
-    height:8px;
-    width:8px;
-    margin:0 4px;
-    display:inline-block;
-    border-radius:50%;
-    background:rgba(255,215,0,0.3);
-    transition:0.3s;
-    cursor:pointer;
-}
-
-.dot.active{
-    width:18px;
-    border-radius:10px;
-    background:#FFD700;
-    box-shadow:0 0 10px #FFD70088;
-}
-
-.card p{
-font-size:13px;
-font-weight:600;
-color:#FFD700; /* FIX GOLD */
-text-shadow:0 0 6px #FFD70033;
-}
-
-.card a{
-color:#FFD700; /* kalau pakai <a> card */
-text-decoration:none;
-}
-
-
-.brand {
-  display: flex;
-  flex-direction: column;
-  line-height: 1;
-  align-items: center;
-}
-
-/* SHINCORE (BESAR + GOLD ANIMASI) */
-.brand-title {
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: 2px;
-
-  background: linear-gradient(90deg,#f5c542,#fff3b0,#f5c542);
-  background-size: 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  animation: goldMove 3s linear infinite, floatLogoText 3s ease-in-out infinite;
-  text-shadow: 0 0 10px rgba(245,197,66,0.3);
-}
-
-/* TOPUP STORE (KECIL) */
-.brand-sub {
-  font-size: 10px;
-  letter-spacing: 4px;
-  color: #d4af37;
-  opacity: 0.9;
-
-  animation: fadeFloat 3s ease-in-out infinite;
-}
-
-/* 🔥 ANIMASI GOLD SHINE */
-@keyframes goldMove {
-  0% { background-position: 0%; }
-  100% { background-position: 200%; }
-}
-
-/* 🔥 FLOAT GERAK NAIK TURUN */
-@keyframes floatLogoText {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-2px); }
-}
-
-/* 🔥 SUB FLOAT HALUS */
-@keyframes fadeFloat {
-  0%,100% { transform: translateX(0); opacity: 0.7; }
-  50% { transform: translateX(2px); opacity: 1; }
-}
-
-</style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-
-<!-- DIAMOND RAIN -->
-
-<script>
-function createDiamond(){
-    const d = document.createElement("img");
-    d.src = "assets/diamond.png";
-    d.classList.add("diamond");
-    d.style.left = Math.random() * 100 + "vw";
-    d.style.animationDuration = (3 + Math.random() * 5) + "s";
-
-    document.body.appendChild(d);
-
-    setTimeout(()=>{
-        d.remove();
-    }, 8000);
-}
-
-setInterval(createDiamond, 250);
-
-
-// ===== SLIDER + DOT FIX =====
-document.addEventListener("DOMContentLoaded", () => {
-
-    const slides = document.querySelector(".slides");
-    const dots = document.querySelectorAll(".dot");
-
-    if(!slides || dots.length === 0) return;
-
-    let index = 0;
-
-    function showSlide(i){
-        index = i;
-
-        slides.style.transform = `translateX(-${i * 100}%)`;
-
-        dots.forEach(d => d.classList.remove("active"));
-        dots[i].classList.add("active");
-    }
-
-    function nextSlide(){
-        index = (index + 1) % dots.length;
-        showSlide(index);
-    }
-
-    // auto jalan
-    setInterval(nextSlide, 4000);
-
-    // klik dot
-    dots.forEach((dot, i)=>{
-        dot.addEventListener("click", ()=>{
-            showSlide(i);
-        });
-    });
-
-});
-</script>
-
-
-
-<!-- NAVBAR -->
-
-<nav>
-
-<div class="logo">
-<img src="assets/logo.png">
-<div class="brand">
-  <span class="brand-title">SHINCORE</span>
-  <span class="brand-sub">TOPUP STORE</span>
+<div class="particles">
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
 </div>
-</div>
+<div class="bg-animation"></div>
 
-<div class="menu" id="menu">
-<a href="#">Home</a>
-<a href="#games">Games</a>
-<a href="support.html">support</a>
-</div>
 
-<div class="hamburger" id="hamburger" onclick="toggleMenu()">
-☰
-</div>
+<header>
 
-</nav>
+  <div class="logo">
 
-<!-- SLIDER -->
+  <img src="logoo.png" alt="Luxora Logo">
 
-<div class="slider">
-
-<div class="slider-box">
-
-<div class="slides" id="slides">
-
-<img src="assets/banner1.png">
-<img src="assets/banner2.png">
-<img src="assets/banner3.png">
+  <span>LUXORA</span>
 
 </div>
 
-</div>
+  <nav id="navMenu">
+    <a href="#home">Home</a>
+    <a href="#produk">Produk</a>
+    <a href="support.html">Support</a>
+  </nav>
 
-</div>
-
-<div class="dots">
-  <span class="dot active"></span>
-  <span class="dot"></span>
-  <span class="dot"></span>
-</div>
-
-
-<!-- PROMO BERJALAN -->
-<div class="promo-bar">
-  <div class="promo-track">
-    <span>
-      👑 PROMO SHINCORE TOPUP • 💎 DISKON 10% DI DIAMOND 500+ • 
-      FAST PROCESS ⚡ • ☎️ 24/7 ONLINE SUPPORT • 
-      AMAN & TERPERCAYA • 🔥 MEMBER VIP BONUS CASHBACK •
-    </span>
-
-    <span>
-      👑 PROMO SHINCORE TOPUP • 💎 DISKON 10% DI DIAMOND 500+ • 
-      FAST PROCESS ⚡ • ☎️ 24/7 ONLINE SUPPORT • 
-      AMAN & TERPERCAYA •🔥 MEMBER VIP BONUS CASHBACK •
-    </span>
+  <div class="menu-toggle" id="menuToggle">
+    ☰
   </div>
-</div>
 
-<!-- TITLE -->
+  <div class="cart-icon">
+    🛒
+    <span id="cartCount">0</span>
+  </div>
 
-<h2 class="section-title" id="games">Pilih Game</h2>
+</header>
 
-<!-- GRID -->
+<section class="banner-slider">
 
-<div class="grid">
+  <div class="slider">
 
-<div class="card" onclick="pilihGame('mobilelegends')">
-<img src="assets/mobilelegendss.jpg">
-<p>MOBILE LEGENDS</p>
-</div>
+    <div class="slide-track">
 
-<div class="card" onclick="pilihGame('freefire')">
-<img src="assets/freefire.jpg">
-<p>FREE FIRE</p>
-</div>
+      <div class="slide">
+        <img src="bannner1.png">
+      </div>
 
-<div class="card" onclick="pilihGame('pubg')">
-<img src="assets/pubg.jpg">
-<p>PUBG MOBILE</p>
-</div>
+      <div class="slide">
+        <img src="bannner2.png">
+      </div>
 
-<div class="card" onclick="pilihGame('valo')">
-<img src="assets/valo.jpg">
-<p>VALORANT</p>
-</div>
+      <div class="slide">
+        <img src="bannner3.png">
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="slider-dots">
+
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+
+  </div>
 
 
-<div class="card" onclick="pilihGame('roblox')">
-<img src="assets/roblox.jpg">
-<p>ROBLOX</p>
-</div>
+</section>
 
-<div class="card" onclick="pilihGame('genshinimpact')">
-<img src="assets/genshin.jpg">
-<p>GENSHIN IMPACT</p>
-</div>
+<div class="promo-running">
 
-</div>
+  <div class="promo-track">
 
-<section id="joki">
-  <h2 class="section-title">JOKI GAME</h2>
+    <span>
+      ✨ Promo Besar Diskon Hingga 90% • 
+      🚚 Gratis Ongkir Seluruh Indonesia • 
+      🔥 Flash Sale Setiap Hari • 
+      ❤️ Produk Premium Original • 
+      🛒 Checkout Cepat & Aman • 
+      🎧 Support 24 Jam •
+    </span>
 
-  <div class="grid">
+    <span>
+      ✨ Promo Besar Diskon Hingga 90% • 
+      🚚 Gratis Ongkir Seluruh Indonesia • 
+      🔥 Flash Sale Setiap Hari • 
+      ❤️ Produk Premium Original • 
+      🛒 Checkout Cepat & Aman • 
+      🎧 Support 24 Jam •
+    </span>
 
-  <a href="order.html?game=ml" class="card">
-    <img src="assets/mobilelegendss.jpg">
-    <p>Mobile Legends</p>
-  </a>
-
-  <a href="order.html?game=ff" class="card">
-    <img src="assets/freefire.jpg">
-    <p>Free Fire</p>
-  </a>
-
-  <a href="order.html?game=pubg" class="card">
-    <img src="assets/pubg.jpg">
-    <p>PUBG Mobile</p>
-  </a>
-
-  <a href="order.html?game=valo" class="card">
-    <img src="assets/valo.jpg">
-    <p>Valorant</p>
-  </a>
+  </div>
 
 </div>
+
+
+
+<section class="hero" id="home">
+
+  <div class="hero-text">
+    <h1>
+      E-Commerce
+      Premium
+    </h1>
+<p>Belanja Modern, Hidup Lebih Mudah Dan Temukan Produk Impianmu, Belanja Cepat, Aman, & Stylish</p>
+    <button onclick="scrollProduk()">
+      Shop Now
+    </button>
+  </div>
+
+
 </section>
 
 
 
-<!-- FOOTER -->
+<section class="produk" id="produk">
 
-<footer>
+  <div class="produk-header">
 
-<div class="social">
+    <h2>Produk Premium</h2>
 
-<a href="https://instagram.com" target="_blank">
-<ion-icon name="logo-instagram"></ion-icon>
-</a>
+    <input type="text" id="searchInput" placeholder="Cari produk...">
 
-<a href="https://wa.me/628123456789" target="_blank">
-<ion-icon name="logo-whatsapp"></ion-icon>
-</a>
+  </div>
 
-<a href="https://tiktok.com" target="_blank">
-<ion-icon name="logo-tiktok"></ion-icon>
-</a>
+  <div class="produk-grid" id="produkContainer"></div>
 
-<a href="https://youtube.com" target="_blank">
-<ion-icon name="logo-youtube"></ion-icon>
-</a>
+</section>
+
+<div class="cart-popup" id="cartPopup">
+
+  <div class="cart-popup-header">
+
+    <h2>Shopping Cart</h2>
+
+    <div class="close-cart" id="closeCart">
+      ✕
+    </div>
+
+  </div>
+
+  <div id="cartItems"></div>
+
+  <div class="total-box">
+    Total: Rp <span id="totalHarga">0</span>
+  </div>
+
+  <button class="pay-btn" onclick="bayarSekarang()">
+    Bayar Sekarang
+  </button>
+
+  <div id="paymentStatus"></div>
 
 </div>
 
-<p>Top Up Cepat • Harga Murah • Proses Cepat</p>
+<script src="app.js"></script>
+
+<footer class="footer">
+
+  <h2>LUXORA</h2>
+
+  <p>
+    Modern Premium Ecommerce Experience
+  </p>
+
+  <div class="socials">
+
+    <a href="#">
+      <i class="fab fa-tiktok"></i>
+    </a>
+
+    <a href="#">
+      <i class="fab fa-instagram"></i>
+    </a>
+
+    <a href="#">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <a href="#">
+      <i class="fas fa-envelope"></i>
+    </a>
+
+  </div>
 
 </footer>
 
-<!-- IONICONS -->
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
 
-
-
-<!-- SLIDER JS -->
-
-<script>
-
-let index=0;
-
-const slides=document.getElementById("slides");
-
-const total=slides.children.length;
-
-setInterval(()=>{
-
-index++;
-
-if(index>=total){
-index=0;
-}
-
-slides.style.transform=`translateX(-${index*100}%)`;
-
-},4000);
-
-/* HAMBURGER */
-
-function toggleMenu(){
-
-const menu=document.getElementById("menu");
-
-const burger=document.getElementById("hamburger");
-
-menu.classList.toggle("show");
-
-burger.classList.toggle("active");
-
-}
-
-function pilihGame(game){
-
-window.location.href = `game-detail.html?game=${game}`;
-
-}
-
-
-
-
-</script>
-
+<div class="floating-support" onclick="window.location.href='support.html'">
+  💬
+</div>
 </body>
 </html>
